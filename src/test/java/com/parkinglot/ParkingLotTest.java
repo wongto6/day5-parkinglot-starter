@@ -1,10 +1,27 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
+
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setup() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    private String systemOut() {
+        return outContent.toString();
+    }
 
     @Test
     void should_return_ticket_when_park_given_a_car() {
@@ -85,5 +102,22 @@ public class ParkingLotTest {
         //Then
         assertNull(ticket);
     }
+
+    @Test
+    void should_print_unrecognized_ticket_when_fetch_given_used_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("A99999");
+        //When
+        Ticket ticket = parkingLot.park(car);
+        Car fetchCar = parkingLot.fetch(ticket);
+        Car fetchCarTwice = parkingLot.fetch(ticket);
+
+        //Then
+        String expectedOutput = "Unrecognized parking ticket.";
+        assertThat(systemOut()).contains(String.format(expectedOutput));
+    }
+
+
 
 }
