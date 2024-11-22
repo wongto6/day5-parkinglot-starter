@@ -101,13 +101,11 @@ public class ParkingLotTest {
         parkingLot.updateAvailableSlots(0);
 
         //When
-        assertThrows(NoAvailablePositionException.class, () ->parkingLot.park(car));
+        assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(car));
 
         //Then
         String expectedOutput = "No available position.";
         assertThat(systemOut()).contains(String.format(expectedOutput));
-
-
     }
 
 }
