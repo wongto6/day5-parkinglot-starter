@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParkingLotTest {
 
@@ -79,6 +80,7 @@ public class ParkingLotTest {
         Car fetchCar = parkingBoy.fetch(ticket);
 
         //Then
+        assertEquals(secondParkingLot, ticket.getParkingLot());
         assertEquals(car, fetchCar);
     }
 

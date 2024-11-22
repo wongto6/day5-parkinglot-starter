@@ -10,14 +10,32 @@ public class ParkingLot {
 
 
     public static final int CAR_TO_PARK = 1;
-    private Integer availablePositions = 10;
+    private Integer initialAvailablePositions = 10;
+    private Integer availablePositions = initialAvailablePositions;
+
+    public ParkingLot() {
+
+    }
+
+    public ParkingLot(Integer initialAvailablePositions) {
+        this.initialAvailablePositions = initialAvailablePositions;
+        this.availablePositions = initialAvailablePositions;
+    }
+
+    public Integer getInitialAvailablePositions() {
+        return initialAvailablePositions;
+    }
+
+    public Float getUtilizationRatio(){
+        return (float) availablePositions / (float) initialAvailablePositions;
+    }
 
     public Map<Ticket, Car> getParkingRecords() {
         return parkingRecords;
     }
 
     public boolean checkAvailableSlotsForPark() {
-        return getAvailablePositions() - CAR_TO_PARK > 0;
+        return getAvailablePositions() - CAR_TO_PARK >= 0;
     }
 
     public Integer getAvailablePositions() {
