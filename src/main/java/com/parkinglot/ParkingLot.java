@@ -19,6 +19,8 @@ public class ParkingLot {
 
         parkingRecords.put(ticket, car);
 
+        updateAvailableSlots(getAvailableSlots() - CAR_TO_PARK);
+
         return ticket;
     }
 
