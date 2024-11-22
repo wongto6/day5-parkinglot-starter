@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class StandardParkingBoy {
 
-    private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+    private List<ParkingLot> parkingLots;
 
     public StandardParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
