@@ -26,8 +26,8 @@ public class ParkingLot {
         return initialAvailablePositions;
     }
 
-    public Float getUtilizationRatio(){
-        return (float) availablePositions / (float) initialAvailablePositions;
+    public Float getUtilizationRatio() {
+        return 1f - (float) availablePositions / (float) getInitialAvailablePositions();
     }
 
     public Map<Ticket, Car> getParkingRecords() {
