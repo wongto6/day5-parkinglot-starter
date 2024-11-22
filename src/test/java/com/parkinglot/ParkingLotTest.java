@@ -45,7 +45,6 @@ public class ParkingLotTest {
     @Test
     void should_return_car_for_first_parkinglot_when_fetch_given_valid_ticket_and_a_standard_parking_boy() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
 
