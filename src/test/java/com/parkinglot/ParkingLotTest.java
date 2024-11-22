@@ -65,44 +65,6 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_null_when_fetch_given_wrong_ticket() {
-        //Given
-        ParkingLot parkingLot = new ParkingLot();
-        //When
-        Ticket wrongTicket = new Ticket();
-        Car fetchBigCar = parkingLot.fetch(wrongTicket);
-
-        //Then
-        assertNull(fetchBigCar);
-    }
-
-    @Test
-    void should_null_when_fetch_given_used_ticket() {
-        //Given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car("A99999");
-        //When
-        Ticket ticket = parkingLot.park(car);
-        Car fetchCar = parkingLot.fetch(ticket);
-        Car fetchCarTwice = parkingLot.fetch(ticket);
-
-        //Then
-        assertNull(fetchCarTwice);
-    }
-
-    @Test
-    void should_return_null_when_park_given_a_car_and_full_capacity() {
-        //Given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car("A99999");
-        parkingLot.updateAvailableSlots(0);
-        //When
-        Ticket ticket = parkingLot.park(car);
-        //Then
-        assertNull(ticket);
-    }
-
-    @Test
     void should_print_unrecognized_ticket_when_fetch_given_used_ticket() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
@@ -110,7 +72,7 @@ public class ParkingLotTest {
         //When
         Ticket ticket = parkingLot.park(car);
         Car fetchCar = parkingLot.fetch(ticket);
-        Car fetchCarTwice = parkingLot.fetch(ticket);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(ticket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";
@@ -121,9 +83,10 @@ public class ParkingLotTest {
     void should_print_unrecognized_ticket_when_fetch_given_wrong_ticket() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
-        //When
         Ticket wrongTicket = new Ticket();
-        parkingLot.fetch(wrongTicket);
+
+        //When
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(wrongTicket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";
@@ -131,20 +94,14 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_print_unrecognized_ticket_when_park_given_a_car_and_full_capacity() {
+    void should_print_no_available_position_when_park_given_a_car_and_full_capacity() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
         parkingLot.updateAvailableSlots(0);
 
-        Exception error = null;
-
         //When
-        try{
-            parkingLot.park(car);
-        }catch (Exception e) {
-            assertThatIllegalArgumentException();
-        }
+        assertThrows(NoAvailablePositionException.class, () ->parkingLot.park(car));
 
         //Then
         String expectedOutput = "No available position.";

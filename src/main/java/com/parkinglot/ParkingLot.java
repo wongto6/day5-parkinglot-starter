@@ -15,7 +15,7 @@ public class ParkingLot {
 
         if (!checkAvailableSlotsForPark()) {
             System.out.println(NO_AVAILABLE_POSITION);
-            return null;
+            throw new NoAvailablePositionException();
         }
 
         Ticket ticket = new Ticket(car, parkingRecords.size());
@@ -47,7 +47,7 @@ public class ParkingLot {
 
         if (isTicketUsed(ticket) || !parkingRecords.containsKey(ticket)) {
             System.out.println(UNRECOGNIZED_PARKING_TICKET);
-            throw new IllegalArgumentException(UNRECOGNIZED_PARKING_TICKET);
+            throw new UnrecognizedParkingTicketException();
         }
 
         ticket.setTicketUsed();
