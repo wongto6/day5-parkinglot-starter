@@ -165,7 +165,23 @@ public class ParkingLotTest {
         assertThat(systemOut()).contains(String.format(expectedOutput));
     }
 
+    @Test
+    void should_return_ticket_for_first_parkinglot_when_park_given_a_car_and_a_smart_parking_boy() {
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
 
+
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+                .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
+                .collect(Collectors.toList()));
+
+        Car car = new Car("A99999");
+        //When
+        Ticket ticket = parkingBoy.park(car);
+        //Then
+        assertNotNull(ticket);
+    }
 
 
 
