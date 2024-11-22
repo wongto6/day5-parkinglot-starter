@@ -16,14 +16,16 @@ public class StandardParkingBoy {
 
     public Ticket park(Car car) {
 
-        if (checkAllAvailableSlotsForPark()) {
+        List<ParkingLot> filteredParkingLots = parkingLots.stream()
+                .filter(ParkingLot::checkAvailableSlotsForPark)
+                .collect(Collectors.toList());
+
+        if (checkAllAvailableSlotsForPark(filteredParkingLots)) {
             System.out.println(ParkingLot.NO_AVAILABLE_POSITION);
             throw new NoAvailablePositionException();
         }
 
-        ParkingLot parkingLot = parkingLots.stream()
-                .filter(ParkingLot::checkAvailableSlotsForPark)
-                .collect(Collectors.toList())
+        ParkingLot parkingLot = filteredParkingLots
                 .getFirst();
 
         Ticket ticket = new Ticket(car, parkingLot.getParkingRecords().size(), parkingLot);
@@ -35,10 +37,8 @@ public class StandardParkingBoy {
         return ticket;
     }
 
-    public boolean checkAllAvailableSlotsForPark() {
-        return parkingLots.stream()
-                .filter(ParkingLot::checkAvailableSlotsForPark)
-                .collect(Collectors.toList())
+    public boolean checkAllAvailableSlotsForPark(List<ParkingLot> filteredParkingLots) {
+        return filteredParkingLots
                 .isEmpty();
     }
 
