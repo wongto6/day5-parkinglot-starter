@@ -82,7 +82,29 @@ public class ParkingLotTest {
         assertEquals(car, fetchCar);
     }
 
+    @Test
+    void should_car_when_fetch_given_two_valid_ticket_and_a_standard_parking_boy() {
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        StandardParkingBoy parkingBoy = new StandardParkingBoy(Arrays
+                .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
+                .collect(Collectors.toList()));
 
+        //When
+        Car bigCar = new Car("A99999");
+        Ticket bigTicket = parkingBoy.park(bigCar);
+        firstParkingLot.updateAvailablePositions(0);
+        Car smallCar = new Car("B99999");
+        Ticket smallTicket = parkingBoy.park(smallCar);
+
+        Car fetchBigCar = parkingBoy.fetch(bigTicket);
+        Car fetchSmallCar = parkingBoy.fetch(smallTicket);
+
+        //Then
+        assertEquals(bigCar, fetchBigCar);
+        assertEquals(smallCar, fetchSmallCar);
+    }
 
 
 
