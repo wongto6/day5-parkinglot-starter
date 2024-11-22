@@ -49,4 +49,8 @@ public class ParkingLot {
         return parkingRecords.get(ticket);
     }
 
+    public void setAvailableSlots(int availableSlots) {
+        this.availableSlots = availableSlots;
+    }
+
 }
