@@ -14,7 +14,7 @@ public class ParkingLot {
     // standardParkingBoy is a setter to parkingLot
 
     public static final int CAR_TO_PARK = 1;
-    private Integer availableSlots = 10;
+    private Integer availablePositions = 10;
 
     public Ticket park(Car car) {
 
@@ -27,7 +27,7 @@ public class ParkingLot {
 
         parkingRecords.put(ticket, car);
 
-        updateAvailableSlots(getAvailableSlots() - CAR_TO_PARK);
+        updateAvailablePositions(getAvailablePositions() - CAR_TO_PARK);
 
         return ticket;
     }
@@ -37,15 +37,15 @@ public class ParkingLot {
     }
 
     public boolean checkAvailableSlotsForPark() {
-        return getAvailableSlots() - CAR_TO_PARK > 0;
+        return getAvailablePositions() - CAR_TO_PARK > 0;
     }
 
-    public Integer getAvailableSlots() {
-        return availableSlots;
+    public Integer getAvailablePositions() {
+        return availablePositions;
     }
 
-    public void updateAvailableSlots(Integer updatedAvailableSlots) {
-        this.availableSlots = updatedAvailableSlots;
+    public void updateAvailablePositions(Integer updatedAvailableSlots) {
+        this.availablePositions = updatedAvailableSlots;
     }
 
     public boolean isTicketUsed(Ticket ticket) {

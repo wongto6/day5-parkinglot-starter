@@ -19,7 +19,7 @@ public class StandardParkingBoy {
 
         parkingLot.getParkingRecords().put(ticket, car);
 
-        parkingLot.updateAvailableSlots(parkingLot.getAvailableSlots() - parkingLot.CAR_TO_PARK);
+        parkingLot.updateAvailablePositions(parkingLot.getAvailablePositions() - parkingLot.CAR_TO_PARK);
 
         return ticket;
     }
@@ -35,7 +35,6 @@ public class StandardParkingBoy {
 
         return parkingLot.getParkingRecords().get(ticket);
     }
-
 
 
 }

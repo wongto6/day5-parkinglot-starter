@@ -98,7 +98,7 @@ public class ParkingLotTest {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
-        parkingLot.updateAvailableSlots(0);
+        parkingLot.updateAvailablePositions(0);
 
         //When
         assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(car));
@@ -190,7 +190,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy parkingBoy = new StandardParkingBoy(parkingLot);
         Car car = new Car("A99999");
-        parkingLot.updateAvailableSlots(0);
+        parkingLot.updateAvailablePositions(0);
 
         //When
         assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car));
