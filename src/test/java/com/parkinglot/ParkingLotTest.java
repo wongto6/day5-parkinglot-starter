@@ -289,6 +289,26 @@ public class ParkingLotTest {
         assertThat(systemOut()).contains(String.format(expectedOutput));
     }
 
+    @Test
+    void should_print_no_available_position_when_park_given_a_car_and_a_smart_parking_boy() {
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+                .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
+                .collect(Collectors.toList()));
+        Car car = new Car("A99999");
+        firstParkingLot.updateAvailablePositions(0);
+        secondParkingLot.updateAvailablePositions(0);
+
+        //When
+        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car));
+
+        //Then
+        String expectedOutput = "No available position.";
+        assertThat(systemOut()).contains(String.format(expectedOutput));
+    }
+
 
 
 
