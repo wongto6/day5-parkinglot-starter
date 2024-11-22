@@ -118,6 +118,30 @@ public class ParkingLotTest {
         assertThat(systemOut()).contains(String.format(expectedOutput));
     }
 
+    @Test
+    void should_print_unrecognized_ticket_when_fetch_given_wrong_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        //When
+        Ticket wrongTicket = new Ticket();
+        parkingLot.fetch(wrongTicket);
 
+        //Then
+        String expectedOutput = "Unrecognized parking ticket.";
+        assertThat(systemOut()).contains(String.format(expectedOutput));
+    }
+
+    @Test
+    void should_print_unrecognized_ticket_when_park_given_a_car_and_full_capacity() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("A99999");
+        parkingLot.updateAvailableSlots(0);
+        //When
+        parkingLot.park(car);
+        //Then
+        String expectedOutput = "No available position.";
+        assertThat(systemOut()).contains(String.format(expectedOutput));
+    }
 
 }
