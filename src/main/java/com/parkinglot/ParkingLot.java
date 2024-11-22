@@ -23,7 +23,7 @@ public class ParkingLot {
     }
 
     public boolean checkAvailableSlotsForPark() {
-        return availableSlots - CAR_TO_PARK > 0;
+        return getAvailableSlots() - CAR_TO_PARK > 0;
     }
 
     public Integer getAvailableSlots() {
@@ -49,8 +49,5 @@ public class ParkingLot {
         return parkingRecords.get(ticket);
     }
 
-    public void setAvailableSlots(int availableSlots) {
-        this.availableSlots = availableSlots;
-    }
 
 }

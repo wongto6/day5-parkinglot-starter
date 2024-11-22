@@ -79,7 +79,7 @@ public class ParkingLotTest {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
-        parkingLot.setAvailableSlots(0);
+        parkingLot.updateAvailableSlots(0);
         //When
         Ticket ticket = parkingLot.park(car);
         //Then
