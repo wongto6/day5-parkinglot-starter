@@ -32,7 +32,7 @@ public class StandardParkingBoy {
 
         parkingLot.getParkingRecords().put(ticket, car);
 
-        parkingLot.updateAvailablePositions(parkingLot.getAvailablePositions() - parkingLot.CAR_TO_PARK);
+        parkingLot.updateAvailablePositions(parkingLot.getAvailablePositions() - ParkingLot.CAR_TO_PARK);
 
         return ticket;
     }
@@ -45,7 +45,7 @@ public class StandardParkingBoy {
     public Car fetch(Ticket ticket) {
 
         if (ticket.getParkingLot() == null || ticket.getParkingLot().isTicketUsed(ticket) || !ticket.getParkingLot().getParkingRecords().containsKey(ticket)) {
-            System.out.println(ticket.getParkingLot().UNRECOGNIZED_PARKING_TICKET);
+            System.out.println(ParkingLot.UNRECOGNIZED_PARKING_TICKET);
             throw new UnrecognizedParkingTicketException();
         }
 
