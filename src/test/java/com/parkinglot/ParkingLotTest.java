@@ -366,12 +366,13 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_car_for_second_parkinglot_when_fetch_given_valid_ticket_and_a_super_parking_boy() {
+    void should_return_car_for_second_parkinglot_when_fetch_given_valid_ticket_and_a_super_parking_boy_second_ratio_lower_than_first() {
         //Given
-        ParkingLot firstParkingLot = new ParkingLot();
-        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingLot firstParkingLot = new ParkingLot(10);
+        ParkingLot secondParkingLot = new ParkingLot(100);
 
         firstParkingLot.updateAvailablePositions(2);
+        secondParkingLot.updateAvailablePositions(2);
 
         SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
