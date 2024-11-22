@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
@@ -137,11 +136,21 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
         parkingLot.updateAvailableSlots(0);
+
+        Exception error = null;
+
         //When
-        parkingLot.park(car);
+        try{
+            parkingLot.park(car);
+        }catch (Exception e) {
+            assertThatIllegalArgumentException();
+        }
+
         //Then
         String expectedOutput = "No available position.";
         assertThat(systemOut()).contains(String.format(expectedOutput));
+
+
     }
 
 }

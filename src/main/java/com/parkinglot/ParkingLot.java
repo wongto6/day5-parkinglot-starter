@@ -18,7 +18,7 @@ public class ParkingLot {
             return null;
         }
 
-        Ticket ticket = new Ticket(car);
+        Ticket ticket = new Ticket(car, parkingRecords.size());
 
         parkingRecords.put(ticket, car);
 
@@ -47,7 +47,7 @@ public class ParkingLot {
 
         if (isTicketUsed(ticket) || !parkingRecords.containsKey(ticket)) {
             System.out.println(UNRECOGNIZED_PARKING_TICKET);
-            return null;
+            throw new IllegalArgumentException(UNRECOGNIZED_PARKING_TICKET);
         }
 
         ticket.setTicketUsed();
