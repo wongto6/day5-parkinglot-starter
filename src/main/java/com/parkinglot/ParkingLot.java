@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private Map<Ticket, Car> parkingRecords= new HashMap<Ticket, Car>();
+    private Map<Ticket, Car> parkingRecords = new HashMap<Ticket, Car>();
 
     public static final int CAR_TO_PARK = 1;
     private Integer availableSlots = 10;
 
     public Ticket park(Car car) {
 
-        if(!checkAvailableSlotsForPark()){
+        if (!checkAvailableSlotsForPark()) {
             return null;
         }
 
@@ -34,7 +34,18 @@ public class ParkingLot {
         this.availableSlots = updatedAvailableSlots;
     }
 
-    public Car fetch(Ticket ticket){
+    public boolean isTicketUsed(Ticket ticket) {
+        return ticket.getTicketUsed();
+    }
+
+    public Car fetch(Ticket ticket) {
+
+        if (isTicketUsed(ticket)) {
+            return null;
+        }
+
+        ticket.setTicketUsed();
+
         return parkingRecords.get(ticket);
     }
 
