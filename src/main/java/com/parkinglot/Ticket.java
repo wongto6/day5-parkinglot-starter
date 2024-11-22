@@ -9,4 +9,8 @@ public class Ticket {
         this.plateNumber = car.getPlateNumber();
     }
 
+    public Ticket(){
+
+    }
+
 }

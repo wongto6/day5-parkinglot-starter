@@ -46,7 +46,18 @@ public class ParkingLotTest {
         //Then
         assertEquals(bigCar, fetchBigCar);
         assertEquals(smallCar, fetchSmallCar);
+    }
 
+    @Test
+    void should_null_when_fetch_given_wrong_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        //When
+        Ticket wrongTicket = new Ticket();
+        Car fetchBigCar = parkingLot.fetch(wrongTicket);
+
+        //Then
+        assertNull(fetchBigCar);
     }
 
 
