@@ -8,6 +8,11 @@ public class ParkingLot {
     public static final String NO_AVAILABLE_POSITION = "No available position.";
     private Map<Ticket, Car> parkingRecords = new HashMap<Ticket, Car>();
 
+    // only standardParkingBoy
+    // status: working when in a park/fetch, back to available after transaction completed
+    // move all action type methods of parkingLot to standardParkingBoy Class
+    // standardParkingBoy is a setter to parkingLot
+
     public static final int CAR_TO_PARK = 1;
     private Integer availableSlots = 10;
 
@@ -25,6 +30,10 @@ public class ParkingLot {
         updateAvailableSlots(getAvailableSlots() - CAR_TO_PARK);
 
         return ticket;
+    }
+
+    public Map<Ticket, Car> getParkingRecords() {
+        return parkingRecords;
     }
 
     public boolean checkAvailableSlotsForPark() {
