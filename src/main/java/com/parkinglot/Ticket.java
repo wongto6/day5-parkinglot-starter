@@ -16,19 +16,6 @@ public class Ticket {
 
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return Objects.equals(ticketId, ticket.ticketId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(ticketId);
-    }
-
     public void setTicketUsed() {
         this.used = true;
     }
