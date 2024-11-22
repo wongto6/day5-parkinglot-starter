@@ -2,13 +2,12 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
     @Test
-    void should_return_ticket_when_park_given_a_car(){
+    void should_return_ticket_when_park_given_a_car() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
@@ -19,7 +18,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_car_when_fetch_given_valid_ticket(){
+    void should_return_car_when_fetch_given_valid_ticket() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("A99999");
@@ -30,5 +29,26 @@ public class ParkingLotTest {
         //Then
         assertEquals(car, fetchCar);
     }
+
+    @Test
+    void should_car_when_fetch_given_two_valid_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        //When
+        Car bigCar = new Car("A99999");
+        Ticket bigTicket = parkingLot.park(bigCar);
+        Car smallCar = new Car("B99999");
+        Ticket smallTicket = parkingLot.park(smallCar);
+
+        Car fetchBigCar = parkingLot.fetch(bigTicket);
+        Car fetchSmallCar = parkingLot.fetch(smallTicket);
+
+        //Then
+        assertEquals(bigCar, fetchBigCar);
+        assertEquals(smallCar, fetchSmallCar);
+
+    }
+
+
 
 }
