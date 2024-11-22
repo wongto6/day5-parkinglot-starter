@@ -271,6 +271,24 @@ public class ParkingLotTest {
         assertEquals(smallCar, fetchSmallCar);
     }
 
+    @Test
+    void should_print_unrecognized_ticket_when_fetch_given_wrong_ticket_and_a_smart_parking_boy() {
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+                .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
+                .collect(Collectors.toList()));
+        Ticket wrongTicket = new Ticket();
+
+        //When
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(wrongTicket));
+
+        //Then
+        String expectedOutput = "Unrecognized parking ticket.";
+        assertThat(systemOut()).contains(String.format(expectedOutput));
+    }
+
 
 
 
