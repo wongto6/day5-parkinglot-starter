@@ -8,8 +8,6 @@ public class StandardParkingBoy {
 
     private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
 
-    // add a ticket to parkinglot mapping here, the boy would know where to fetch that car
-
     public StandardParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
