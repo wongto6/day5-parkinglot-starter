@@ -7,14 +7,20 @@ public class Ticket {
     private Integer ticketId;
     private String plateNumber;
     private boolean used;
+    private ParkingLot parkingLot;
 
-    public Ticket(Car car, Integer ticketId){
+    public Ticket(Car car, Integer ticketId, ParkingLot parkingLot){
         this.plateNumber = car.getPlateNumber();
         this.ticketId = ticketId;
+        this.parkingLot = parkingLot;
     }
 
     public Ticket(){
 
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
     }
 
     public void setTicketUsed() {
