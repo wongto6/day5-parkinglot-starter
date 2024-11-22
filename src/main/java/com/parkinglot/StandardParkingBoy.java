@@ -16,7 +16,7 @@ public class StandardParkingBoy {
 
     public Ticket park(Car car) {
 
-        if(checkAllAvailableSlotsForPark()){
+        if (checkAllAvailableSlotsForPark()) {
             System.out.println(ParkingLot.NO_AVAILABLE_POSITION);
             throw new NoAvailablePositionException();
         }
@@ -44,7 +44,7 @@ public class StandardParkingBoy {
 
     public Car fetch(Ticket ticket) {
 
-        if (ticket.getParkingLot().isTicketUsed(ticket) || !ticket.getParkingLot().getParkingRecords().containsKey(ticket)) {
+        if (ticket.getParkingLot() == null || ticket.getParkingLot().isTicketUsed(ticket) || !ticket.getParkingLot().getParkingRecords().containsKey(ticket)) {
             System.out.println(ticket.getParkingLot().UNRECOGNIZED_PARKING_TICKET);
             throw new UnrecognizedParkingTicketException();
         }
