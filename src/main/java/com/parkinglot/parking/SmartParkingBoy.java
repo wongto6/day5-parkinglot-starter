@@ -1,12 +1,14 @@
-package com.parkinglot;
+package com.parkinglot.parking;
+
+import com.parkinglot.ParkingLot;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SuperParkingBoy extends StandardParkingBoy {
+public class SmartParkingBoy extends StandardParkingBoy {
 
-    public SuperParkingBoy(List<ParkingLot> parkingLots) {
+    public SmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 
@@ -14,7 +16,7 @@ public class SuperParkingBoy extends StandardParkingBoy {
     public List<ParkingLot> getFilteredParkingLots() {
         return parkingLots.stream()
                 .filter(ParkingLot::checkAvailableSlotsForPark)
-                .sorted(Comparator.comparing(ParkingLot::getUtilizationRatio).reversed())
+                .sorted(Comparator.comparing(ParkingLot::getAvailablePositions).reversed())
                 .collect(Collectors.toList());
     }
 

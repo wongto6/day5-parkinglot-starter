@@ -1,4 +1,10 @@
-package com.parkinglot;
+package com.parkinglot.parking;
+
+import com.parkinglot.Car;
+import com.parkinglot.ParkingLot;
+import com.parkinglot.Ticket;
+import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedParkingTicketException;
 
 import java.util.List;
 import java.util.stream.Collectors;

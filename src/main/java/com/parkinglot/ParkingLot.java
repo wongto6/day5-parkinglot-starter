@@ -1,5 +1,8 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedParkingTicketException;
+
 import java.util.HashMap;
 import java.util.Map;
 

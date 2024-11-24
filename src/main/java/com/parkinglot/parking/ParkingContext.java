@@ -1,4 +1,7 @@
-package com.parkinglot;
+package com.parkinglot.parking;
+
+import com.parkinglot.Car;
+import com.parkinglot.Ticket;
 
 public class ParkingContext {
 
