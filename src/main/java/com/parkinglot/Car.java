@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Car {
 
-    private String plateNumber;
+    private final String plateNumber;
 
     public Car(String plateNumber) {
         this.plateNumber = plateNumber;
