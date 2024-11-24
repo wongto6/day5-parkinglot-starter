@@ -1,10 +1,11 @@
-package com.parkinglot.parking;
+package com.parkinglot.parking.concreteParkingStrategy;
 
 import com.parkinglot.Car;
 import com.parkinglot.ParkingLot;
 import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
+import com.parkinglot.parking.ParkingStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +54,7 @@ public class StandardParkingBoy implements ParkingStrategy {
     @Override
     public Car fetch(Ticket ticket) {
 
-        if (ticket.getParkingLot() == null || ticket.getParkingLot().isTicketUsed(ticket) || !ticket.getParkingLot().getParkingRecords().containsKey(ticket)) {
+        if (isTicketInvalid(ticket)) {
             System.out.println(ParkingLot.UNRECOGNIZED_PARKING_TICKET);
             throw new UnrecognizedParkingTicketException();
         }
@@ -61,6 +62,18 @@ public class StandardParkingBoy implements ParkingStrategy {
         ticket.setTicketUsed();
 
         return ticket.getParkingLot().getParkingRecords().get(ticket);
+    }
+
+    public boolean checkTicketUsage(Ticket ticket) {
+        return ticket.getParkingLot().isTicketUsed(ticket);
+    }
+
+    public boolean checkParkingRecords(Ticket ticket) {
+        return !ticket.getParkingLot().getParkingRecords().containsKey(ticket);
+    }
+
+    public boolean isTicketInvalid(Ticket ticket) {
+        return ticket.getParkingLot() == null || checkTicketUsage(ticket) || checkParkingRecords(ticket);
     }
 
 
