@@ -20,23 +20,16 @@ public class StandardParkingBoy implements ParkingStrategy {
 
     @Override
     public Ticket park(Car car) {
-
         List<ParkingLot> filteredParkingLots = getFilteredParkingLots();
-
         if (checkAllAvailableSlotsForPark(filteredParkingLots)) {
             System.out.println(ParkingLot.NO_AVAILABLE_POSITION);
             throw new NoAvailablePositionException();
         }
-
         ParkingLot parkingLot = filteredParkingLots
                 .getFirst();
-
         Ticket ticket = new Ticket(car, parkingLot.getParkingRecords().size(), parkingLot);
-
         parkingLot.getParkingRecords().put(ticket, car);
-
         parkingLot.updateAvailablePositions(parkingLot.getAvailablePositions() - ParkingLot.CAR_TO_PARK);
-
         return ticket;
     }
 
@@ -53,14 +46,11 @@ public class StandardParkingBoy implements ParkingStrategy {
 
     @Override
     public Car fetch(Ticket ticket) {
-
         if (isTicketInvalid(ticket)) {
             System.out.println(ParkingLot.UNRECOGNIZED_PARKING_TICKET);
             throw new UnrecognizedParkingTicketException();
         }
-
         ticket.setTicketUsed();
-
         return ticket.getParkingLot().getParkingRecords().get(ticket);
     }
 
