@@ -3,9 +3,9 @@ package com.parkinglot;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
 import com.parkinglot.parking.ParkingContext;
-import com.parkinglot.parking.concreteParkingStrategy.SmartParkingBoy;
-import com.parkinglot.parking.concreteParkingStrategy.StandardParkingBoy;
-import com.parkinglot.parking.concreteParkingStrategy.SuperParkingBoy;
+import com.parkinglot.parking.concrete_parking_strategy.SmartParkingBoy;
+import com.parkinglot.parking.concrete_parking_strategy.StandardParkingBoy;
+import com.parkinglot.parking.concrete_parking_strategy.SuperParkingBoy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

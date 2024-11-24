@@ -1,4 +1,4 @@
-package com.parkinglot.parking.concreteParkingStrategy;
+package com.parkinglot.parking.concrete_parking_strategy;
 
 import com.parkinglot.ParkingLot;
 
