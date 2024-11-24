@@ -280,14 +280,14 @@ public class ParkingLotTest {
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
 
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(car, fetchCar);
@@ -301,14 +301,14 @@ public class ParkingLotTest {
 
         firstParkingLot.updateAvailablePositions(2);
 
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(secondParkingLot, ticket.getParkingLot());
@@ -324,14 +324,14 @@ public class ParkingLotTest {
         firstParkingLot.updateAvailablePositions(1);
         secondParkingLot.updateAvailablePositions(1);
 
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(firstParkingLot, ticket.getParkingLot());
@@ -343,19 +343,19 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         //When
         Car bigCar = new Car("A99999");
-        Ticket bigTicket = parkingBoy.park(bigCar);
+        Ticket bigTicket = parkingContext.performPark(bigCar);
         firstParkingLot.updateAvailablePositions(0);
         Car smallCar = new Car("B99999");
-        Ticket smallTicket = parkingBoy.park(smallCar);
+        Ticket smallTicket = parkingContext.performPark(smallCar);
 
-        Car fetchBigCar = parkingBoy.fetch(bigTicket);
-        Car fetchSmallCar = parkingBoy.fetch(smallTicket);
+        Car fetchBigCar = parkingContext.performFetch(bigTicket);
+        Car fetchSmallCar = parkingContext.performFetch(smallTicket);
 
         //Then
         assertEquals(bigCar, fetchBigCar);
@@ -367,13 +367,13 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Ticket wrongTicket = new Ticket();
 
         //When
-        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(wrongTicket));
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingContext.performFetch(wrongTicket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";
@@ -385,15 +385,15 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Car car = new Car("A99999");
         firstParkingLot.updateAvailablePositions(0);
         secondParkingLot.updateAvailablePositions(0);
 
         //When
-        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car));
+        assertThrows(NoAvailablePositionException.class, () -> parkingContext.performPark(car));
 
         //Then
         String expectedOutput = "No available position.";
@@ -405,14 +405,14 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Car car = new Car("A99999");
         //When
-        Ticket ticket = parkingBoy.park(car);
-        Car fetchCar = parkingBoy.fetch(ticket);
-        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(ticket));
+        Ticket ticket = parkingContext.performPark(car);
+        Car fetchCar = parkingContext.performFetch(ticket);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingContext.performFetch(ticket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";
@@ -426,13 +426,13 @@ public class ParkingLotTest {
         ParkingLot secondParkingLot = new ParkingLot();
 
 
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
         //When
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //Then
         assertNotNull(ticket);
     }
@@ -443,14 +443,14 @@ public class ParkingLotTest {
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
 
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(car, fetchCar);
@@ -465,14 +465,14 @@ public class ParkingLotTest {
         firstParkingLot.updateAvailablePositions(2);
         secondParkingLot.updateAvailablePositions(2);
 
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(secondParkingLot, ticket.getParkingLot());
@@ -488,14 +488,14 @@ public class ParkingLotTest {
         firstParkingLot.updateAvailablePositions(1);
         secondParkingLot.updateAvailablePositions(1);
 
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //When
-        Car fetchCar = parkingBoy.fetch(ticket);
+        Car fetchCar = parkingContext.performFetch(ticket);
 
         //Then
         assertEquals(firstParkingLot, ticket.getParkingLot());
@@ -507,19 +507,19 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         //When
         Car bigCar = new Car("A99999");
-        Ticket bigTicket = parkingBoy.park(bigCar);
+        Ticket bigTicket = parkingContext.performPark(bigCar);
         firstParkingLot.updateAvailablePositions(0);
         Car smallCar = new Car("B99999");
-        Ticket smallTicket = parkingBoy.park(smallCar);
+        Ticket smallTicket = parkingContext.performPark(smallCar);
 
-        Car fetchBigCar = parkingBoy.fetch(bigTicket);
-        Car fetchSmallCar = parkingBoy.fetch(smallTicket);
+        Car fetchBigCar = parkingContext.performFetch(bigTicket);
+        Car fetchSmallCar = parkingContext.performFetch(smallTicket);
 
         //Then
         assertEquals(bigCar, fetchBigCar);
@@ -531,13 +531,13 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Ticket wrongTicket = new Ticket();
 
         //When
-        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(wrongTicket));
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingContext.performFetch(wrongTicket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";
@@ -549,15 +549,15 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Car car = new Car("A99999");
         firstParkingLot.updateAvailablePositions(0);
         secondParkingLot.updateAvailablePositions(0);
 
         //When
-        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car));
+        assertThrows(NoAvailablePositionException.class, () -> parkingContext.performPark(car));
 
         //Then
         String expectedOutput = "No available position.";
@@ -569,14 +569,14 @@ public class ParkingLotTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        SuperParkingBoy parkingBoy = new SuperParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SuperParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
         Car car = new Car("A99999");
         //When
-        Ticket ticket = parkingBoy.park(car);
-        Car fetchCar = parkingBoy.fetch(ticket);
-        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(ticket));
+        Ticket ticket = parkingContext.performPark(car);
+        Car fetchCar = parkingContext.performFetch(ticket);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingContext.performFetch(ticket));
 
         //Then
         String expectedOutput = "Unrecognized parking ticket.";

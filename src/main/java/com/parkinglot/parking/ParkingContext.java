@@ -19,4 +19,8 @@ public class ParkingContext {
         return parkingStrategy.park(car);
     }
 
+    public Car performFetch(Ticket ticket) {
+        return parkingStrategy.fetch(ticket);
+    }
+
 }

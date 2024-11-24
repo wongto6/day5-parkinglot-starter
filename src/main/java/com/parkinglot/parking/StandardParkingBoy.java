@@ -50,6 +50,7 @@ public class StandardParkingBoy implements ParkingStrategy {
                 .isEmpty();
     }
 
+    @Override
     public Car fetch(Ticket ticket) {
 
         if (ticket.getParkingLot() == null || ticket.getParkingLot().isTicketUsed(ticket) || !ticket.getParkingLot().getParkingRecords().containsKey(ticket)) {
