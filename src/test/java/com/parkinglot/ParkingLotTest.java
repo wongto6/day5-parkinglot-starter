@@ -257,14 +257,13 @@ public class ParkingLotTest {
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
 
-
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(Arrays
+        ParkingContext parkingContext = new ParkingContext(new SmartParkingBoy(Arrays
                 .stream((new ParkingLot[]{firstParkingLot, secondParkingLot}))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
 
         Car car = new Car("A99999");
         //When
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = parkingContext.performPark(car);
         //Then
         assertNotNull(ticket);
     }
