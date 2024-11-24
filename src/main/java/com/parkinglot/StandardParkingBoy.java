@@ -3,19 +3,18 @@ package com.parkinglot;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StandardParkingBoy {
+public class StandardParkingBoy implements ParkingStrategy {
 
-    private List<ParkingLot> parkingLots;
+    protected List<ParkingLot> parkingLots;
 
     public StandardParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
+    @Override
     public Ticket park(Car car) {
 
-        List<ParkingLot> filteredParkingLots = parkingLots.stream()
-                .filter(ParkingLot::checkAvailableSlotsForPark)
-                .collect(Collectors.toList());
+        List<ParkingLot> filteredParkingLots = getFilteredParkingLots();
 
         if (checkAllAvailableSlotsForPark(filteredParkingLots)) {
             System.out.println(ParkingLot.NO_AVAILABLE_POSITION);
@@ -32,6 +31,12 @@ public class StandardParkingBoy {
         parkingLot.updateAvailablePositions(parkingLot.getAvailablePositions() - ParkingLot.CAR_TO_PARK);
 
         return ticket;
+    }
+
+    public List<ParkingLot> getFilteredParkingLots() {
+        return parkingLots.stream()
+                .filter(ParkingLot::checkAvailableSlotsForPark)
+                .collect(Collectors.toList());
     }
 
     public boolean checkAllAvailableSlotsForPark(List<ParkingLot> filteredParkingLots) {
