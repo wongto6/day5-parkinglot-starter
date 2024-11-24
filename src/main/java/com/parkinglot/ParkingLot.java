@@ -50,4 +50,32 @@ public class ParkingLot {
         return ticket.getTicketUsed();
     }
 
+    public Ticket park(Car car) {
+
+        if (!checkAvailableSlotsForPark()) {
+            System.out.println(NO_AVAILABLE_POSITION);
+            throw new NoAvailablePositionException();
+        }
+
+        Ticket ticket = new Ticket(car, parkingRecords.size(), this);
+
+        parkingRecords.put(ticket, car);
+
+        updateAvailablePositions(getAvailablePositions() - CAR_TO_PARK);
+
+        return ticket;
+    }
+
+    public Car fetch(Ticket ticket) {
+
+        if (isTicketUsed(ticket) || !parkingRecords.containsKey(ticket)) {
+            System.out.println(UNRECOGNIZED_PARKING_TICKET);
+            throw new UnrecognizedParkingTicketException();
+        }
+
+        ticket.setTicketUsed();
+
+        return parkingRecords.get(ticket);
+    }
+
 }
