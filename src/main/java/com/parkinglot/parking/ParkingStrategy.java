@@ -5,8 +5,8 @@ import com.parkinglot.Ticket;
 
 public interface ParkingStrategy {
 
-    public Ticket park(Car car);
+    Ticket park(Car car);
 
-    public Car fetch(Ticket ticket);
+    Car fetch(Ticket ticket);
 
 }
