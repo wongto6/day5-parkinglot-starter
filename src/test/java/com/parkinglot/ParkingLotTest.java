@@ -2,7 +2,6 @@ package com.parkinglot;
 
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
-import com.parkinglot.parking.concrete_parking_strategy.DefaultParkingStrategy;
 import com.parkinglot.parking.concrete_parking_strategy.SmartParkingStrategy;
 import com.parkinglot.parking.StandardParkingBoy;
 import com.parkinglot.parking.concrete_parking_strategy.SuperParkingStrategy;
